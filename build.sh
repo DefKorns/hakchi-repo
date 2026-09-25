@@ -13,9 +13,9 @@ trap 'rm -rf "$WORK"' EXIT
 rm -rf "$OUT"
 mkdir -p "$REPO_DIR"
 touch "$OUT/.nojekyll"
-cp readme.md "$REPO_DIR/readme.md"
 : > "$REPO_DIR/list"
 rows=""
+mods_md=""
 
 html_escape() { sed -e 's/&/\&amp;/g' -e 's/</\&lt;/g' -e 's/>/\&gt;/g'; }
 
@@ -60,13 +60,20 @@ while IFS= read -r line; do
   fi
 
   title=$(sed -n '1{/^---/!q}; 2,/^---/{s/^Name:[[:space:]]*//p}' "$dir"/readme* | head -1)
-  title=$(printf '%s' "${title:-$name}" | html_escape)
+  title=${title:-$name}
+  mods_md+="- **$title** - $tag ([source](https://github.com/$repo))"$'\n'
+  title=$(printf '%s' "$title" | html_escape)
   rows+="<tr><td>$title</td><td>$(printf '%s' "$tag" | html_escape)</td><td><a href=\"$url\">$name.hmod</a></td><td><a href=\"https://github.com/$repo\">$repo</a></td></tr>
 "
 
   echo "$name.hmod" >> "$REPO_DIR/list"
   echo "$name: $tag"
 done < sources.txt
+
+MODS="$mods_md" UPDATED="$(date -u +%Y-%m-%d)" awk '
+  /^\{\{MODS\}\}$/ { printf "%s", ENVIRON["MODS"]; next }
+  { gsub(/\{\{UPDATED\}\}/, ENVIRON["UPDATED"]); print }
+' readme.md > "$REPO_DIR/readme.md"
 
 (cd "$REPO_DIR" && tar -czf pack.tgz list readme.md ./*.hmod)
 
