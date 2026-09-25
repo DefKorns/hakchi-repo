@@ -1,0 +1,46 @@
+name: Publish
+
+on:
+  push:
+    branches: [master]
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+  # Mod repos can trigger a rebuild right after releasing:
+  # gh api repos/DefKorns/hakchi-repo/dispatches -f event_type=hmod-released
+  repository_dispatch:
+    types: [hmod-released]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Build repository
+        run: bash build.sh
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - uses: actions/configure-pages@v6
+
+      # .repo/ is a dot directory; without this the artifact drops it.
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: site
+          include-hidden-files: true
+
+      - id: deploy
+        uses: actions/deploy-pages@v5
