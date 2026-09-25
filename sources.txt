@@ -1,5 +1,5 @@
 # repo                              name (.hmod in hakchi)          asset regex                                  channel
-DefKorns/OptionsMenu                options_deluxe                  ^options_deluxe_v[0-9_]+(-[a-z0-9]+)?\.hmod$ pre
+DefKorns/OptionsMenu                options_deluxe                  ^options_deluxe_v[0-9_]+(-[a-z]+[0-9]*(_[0-9]+)*)?\.hmod$ pre
 DefKorns/OptionsMenu                options_deluxe_compat           ^options_deluxe.*_compat\.hmod$              pre
 DefKorns/om_theme-selector          om_theme-selector               ^om_theme-selector.*\.hmod$                  stable
 DefKorns/OptionsMenu-JapaneseFontPack om_japanese_font_pack         \.hmod$                                      stable
