@@ -14,31 +14,36 @@ rm -rf "$OUT"
 mkdir -p "$REPO_DIR"
 touch "$OUT/.nojekyll"
 : > "$REPO_DIR/list"
-rows=""
-mods_md=""
+categories=()
+declare -A cat_md cat_rows
 
 html_escape() { sed -e 's/&/\&amp;/g' -e 's/</\&lt;/g' -e 's/>/\&gt;/g'; }
+trim() { local s=$1; s=${s#"${s%%[![:space:]]*}"}; printf '%s' "${s%"${s##*[![:space:]]}"}"; }
 
-while IFS= read -r line; do
-  line=${line%$'\r'}
-  read -r repo name pattern channel <<< "$line" || true
+while IFS='|' read -r repo name pattern channel category description; do
+  repo=$(trim "$repo")
   case "$repo" in '' | \#*) continue ;; esac
+  name=$(trim "$name")
+  pattern=$(trim "$pattern")
+  channel=$(trim "${channel:-stable}")
+  category=$(trim "$category")
+  description=$(trim "${description%$'\r'}")
 
   stable_only='| select(.prerelease | not)'
-  [ "${channel:-stable}" = pre ] && stable_only=''
+  [ "$channel" = pre ] && stable_only=''
 
   release=$(PATTERN="$pattern" gh api "repos/$repo/releases?per_page=30" --jq "
     [.[] | select(.draft | not) $stable_only
-      | {tag: .tag_name, asset: ([.assets[] | select(.name | test(env.PATTERN))] | first)}
+      | {tag: .tag_name, pre: .prerelease, asset: ([.assets[] | select(.name | test(env.PATTERN))] | first)}
       | select(.asset)]
     | first // empty
-    | [.tag, .asset.browser_download_url] | @tsv")
+    | [.tag, .asset.browser_download_url, .pre] | @tsv")
 
   if [ -z "$release" ]; then
     echo "skip $name: no $channel release of $repo has an asset matching $pattern" >&2
     continue
   fi
-  IFS=$'\t' read -r tag url <<< "$release"
+  IFS=$'\t' read -r tag url prerelease <<< "$release"
 
   hmod=$WORK/$name.hmod
   if ! curl -fsSL -o "$hmod" "$url"; then
@@ -53,22 +58,49 @@ while IFS= read -r line; do
   sha1sum "$hmod" | cut -d' ' -f1 > "$dir/sha1"
 
   readme=$(tar -tf "$hmod" | grep -m1 -iE '^(\./)?readme(\.md|\.txt)?$' || true)
+  readme_out=$dir/readme.md
   if [ -n "$readme" ]; then
-    tar -xOf "$hmod" "$readme" > "$dir/$(basename "$readme" | tr '[:upper:]' '[:lower:]')"
+    readme_out=$dir/$(basename "$readme" | tr '[:upper:]' '[:lower:]')
+    tar -xOf "$hmod" "$readme" > "$WORK/readme"
   else
-    printf -- '---\nName: %s\nCreator: %s\nVersion: %s\n---\n' "$name" "${repo%%/*}" "${tag#v}" > "$dir/readme.md"
+    printf -- '---\nName: %s\nCreator: %s\nVersion: %s\n---\n' "$name" "${repo%%/*}" "${tag#v}" > "$WORK/readme"
   fi
+  NAME="$name" CATEGORY="$category" awk '
+    NR == 1 && !/^---/ { print "---"; print "Name: " ENVIRON["NAME"]; print "Category: " ENVIRON["CATEGORY"]; print "---" }
+    NR == 1 && /^---/ { print; head = 1; next }
+    head && /^Category:/ { if (!c) print "Category: " ENVIRON["CATEGORY"]; c = 1; next }
+    head && /^---/ { if (!c) print "Category: " ENVIRON["CATEGORY"]; head = 0 }
+    { print }
+  ' "$WORK/readme" > "$readme_out"
 
-  title=$(sed -n '1{/^---/!q}; 2,/^---/{s/^Name:[[:space:]]*//p}' "$dir"/readme* | head -1)
+  title=$(sed -n '1{/^---/!q}; 2,/^---/{s/^Name:[[:space:]]*//p}' "$readme_out" | head -1)
   title=${title:-$name}
-  mods_md+="- **$title** - $tag ([source](https://github.com/$repo))"$'\n'
-  title=$(printf '%s' "$title" | html_escape)
-  rows+="<tr><td>$title</td><td>$(printf '%s' "$tag" | html_escape)</td><td><a href=\"$url\">$name.hmod</a></td><td><a href=\"https://github.com/$repo\">$repo</a></td></tr>
+  release_label=$tag
+  [ "$prerelease" = true ] && release_label="$tag (pre-release)"
+
+  [ -n "${cat_md[$category]+x}" ] || categories+=("$category")
+  cat_md[$category]+="- **$title** - $release_label${description:+ - $description} ([source](https://github.com/$repo))"$'\n'
+  cat_rows[$category]+="<tr><td>$(printf '%s' "$title" | html_escape)${description:+<br><small>$(printf '%s' "$description" | html_escape)</small>}</td><td>$(printf '%s' "$release_label" | html_escape)</td><td><a href=\"$url\">$name.hmod</a></td><td><a href=\"https://github.com/$repo\">$repo</a></td></tr>
 "
 
   echo "$name.hmod" >> "$REPO_DIR/list"
-  echo "$name: $tag"
+  echo "$name: $tag ($category)"
 done < sources.txt
+
+mods_md=""
+sections=""
+for category in "${categories[@]}"; do
+  mods_md+="### $category"$'\n\n'"${cat_md[$category]}"$'\n'
+  sections+="<h2>$(printf '%s' "$category" | html_escape)</h2>
+<div class=\"scroll\">
+<table>
+<thead><tr><th>Mod</th><th>Release</th><th>Download</th><th>Source</th></tr></thead>
+<tbody>
+${cat_rows[$category]}</tbody>
+</table>
+</div>
+"
+done
 
 MODS="$mods_md" UPDATED="$(date -u +%Y-%m-%d)" awk '
   /^\{\{MODS\}\}$/ { printf "%s", ENVIRON["MODS"]; next }
@@ -94,19 +126,14 @@ cat > "$OUT/index.html" << HTML
   table { width: 100%; border-collapse: collapse; margin-top: 16px; }
   th, td { text-align: left; padding: 8px; border-bottom: 1px solid var(--line); }
   a { color: inherit; }
+  h2 { margin-top: 32px; }
+  small { color: var(--muted); }
 </style>
 </head>
 <body>
 <h1>DefKorns' Mods</h1>
 <p>hakchi2-CE mod repository. In hakchi, open <strong>Manage repositories</strong> and add:</p>
 <p><code>$SITE_URL</code></p>
-<div class="scroll">
-<table>
-<thead><tr><th>Mod</th><th>Release</th><th>Download</th><th>Source</th></tr></thead>
-<tbody>
-$rows</tbody>
-</table>
-</div>
-</body>
+$sections</body>
 </html>
 HTML
