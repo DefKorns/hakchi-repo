@@ -13,6 +13,7 @@ trap 'rm -rf "$WORK"' EXIT
 rm -rf "$OUT"
 mkdir -p "$REPO_DIR"
 touch "$OUT/.nojekyll"
+cp -r assets/. "$OUT/"
 : > "$REPO_DIR/list"
 categories=()
 declare -A cat_md cat_rows
@@ -131,6 +132,7 @@ cat > "$OUT/index.html" << HTML
 </style>
 </head>
 <body>
+<img src="logo.png" alt="DefKorns" width="160">
 <h1>DefKorns' Mods</h1>
 <p>hakchi2-CE mod repository. In hakchi, open <strong>Manage repositories</strong> and add:</p>
 <p><code>$SITE_URL</code></p>

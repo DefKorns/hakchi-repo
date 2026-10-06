@@ -1,3 +1,5 @@
+<p align="center"><img src="https://defkorns.github.io/hakchi-repo/logo.png" alt="DefKorns" width="200"></p>
+
 # DefKorns' Mod Hub
 
 My hmods for the Classic Minis: NES, SNES, Famicom, Super Famicom, Shonen Jump and Mega Drive/Genesis.
