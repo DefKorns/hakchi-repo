@@ -2,7 +2,7 @@
 
 # DefKorns' Mod Hub
 
-My hmods for the Classic Minis: NES, SNES, Famicom, Super Famicom, Shonen Jump and Mega Drive/Genesis.
+My hmods for the Classic Minis: NES, SNES, Famicom, Super Famicom and Shonen Jump.
 
 **Made for the official consoles - clones and knock-offs are not supported.**
 
