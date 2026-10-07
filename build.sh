@@ -35,8 +35,9 @@ while IFS='|' read -r repo name pattern channel category description; do
 
   release=$(PATTERN="$pattern" gh api "repos/$repo/releases?per_page=30" --jq "
     [.[] | select(.draft | not) $stable_only
-      | {tag: .tag_name, pre: .prerelease, asset: ([.assets[] | select(.name | test(env.PATTERN))] | first)}
+      | {tag: .tag_name, pre: .prerelease, published: .published_at, asset: ([.assets[] | select(.name | test(env.PATTERN))] | first)}
       | select(.asset)]
+    | sort_by(.published) | reverse
     | first // empty
     | [.tag, .asset.browser_download_url, .pre] | @tsv")
 
