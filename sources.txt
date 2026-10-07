@@ -4,7 +4,5 @@ DefKorns/OptionsMenu | options_menu_compat | ^options_.*_compat\.hmod$ | pre | O
 DefKorns/om_theme-selector | om_theme-selector | ^om_theme-selector.*\.hmod$ | pre | Options Menu - Addons | Pick, download and build themes, and set a theme or music per folder.
 DefKorns/OptionsMenu-JapaneseFontPack | om_japanese_font_pack | \.hmod$ | stable | Options Menu - Addons | Smooth Japanese font (Noto Sans JP) for the menu when the language is set to Japanese.
 DefKorns/om-gamepad-remapping-tool | om-gamepad-remapping-tool | \.hmod$ | stable | Options Menu - Addons | Remap your controller buttons for Canoe and Kachikachi from the menu.
-# private repo: its release assets 404 for hakchi
-#DefKorns/Hakchi_Theme_Randomizer | Hakchi_Theme_Randomizer | \.hmod$ | stable | Options Menu - Addons |
 DefKorns/OM_Language-Hack | OM_Shonen_Language-Hack | \.hmod$ | stable | Language | Every system language and rōmaji game titles on the Japanese consoles, plus downloadable custom languages.
 DefKorns/SNES_pt_BR | SNES_pt_BR | \.hmod$ | stable | Language | Replaces European Portuguese with Brazilian Portuguese.
