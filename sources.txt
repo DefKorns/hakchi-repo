@@ -1,6 +1,6 @@
 # repo | name (.hmod in hakchi) | asset regex | channel | category (hakchi tab) | description
-DefKorns/OptionsMenu | options_deluxe | ^options_deluxe_v[0-9_]+(-[a-z]+[0-9]*(_[0-9]+)*)?\.hmod$ | pre | Options Menu | The menu every other mod here plugs into. Install this first.
-DefKorns/OptionsMenu | options_deluxe_compat | ^options_deluxe.*_compat\.hmod$ | pre | Options Menu | Same menu with its own libstdc++, for setups with an hmod that replaces the system one (e.g. RetroArch 1.8.4 Xtreme SC).
+DefKorns/OptionsMenu | options_menu | ^(options_menu|options_deluxe_v[0-9_]+(-[a-z]+[0-9]*(_[0-9]+)*)?)\.hmod$ | pre | Options Menu | The menu every other mod here plugs into. Install this first.
+DefKorns/OptionsMenu | options_menu_compat | ^options_(menu|deluxe.*)_compat\.hmod$ | pre | Options Menu | Same menu with its own libstdc++, for setups with an hmod that replaces the system one (e.g. RetroArch 1.8.4 Xtreme SC).
 DefKorns/om_theme-selector | om_theme-selector | ^om_theme-selector.*\.hmod$ | pre | Options Menu - Addons | Pick, download and build themes, and set a theme or music per folder.
 DefKorns/OptionsMenu-JapaneseFontPack | om_japanese_font_pack | \.hmod$ | stable | Options Menu - Addons | Smooth Japanese font (Noto Sans JP) for the menu when the language is set to Japanese.
 DefKorns/om-gamepad-remapping-tool | om-gamepad-remapping-tool | \.hmod$ | stable | Options Menu - Addons | Remap your controller buttons for Canoe and Kachikachi from the menu.
