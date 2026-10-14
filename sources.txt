@@ -6,4 +6,4 @@ DefKorns/OptionsMenu-JapaneseFontPack | om_japanese_font_pack | \.hmod$ | stable
 DefKorns/om-gamepad-remapping-tool | om-gamepad-remapping-tool | \.hmod$ | stable | Options Menu - Addons | Remap your controller buttons for Canoe and Kachikachi from the menu.
 DefKorns/OM_Language-Hack | OM_Shonen_Language-Hack | \.hmod$ | stable | Language | Every system language and rōmaji game titles on the Japanese consoles, plus downloadable custom languages.
 DefKorns/SNES_pt_BR | SNES_pt_BR | \.hmod$ | stable | Language | Replaces European Portuguese with Brazilian Portuguese.
-DefKorns/shonen-jump-clovercon-fix | shonen_jump_clovercon_fix | \.hmod$ | stable | System | Fixes unresponsive controllers and a frozen menu when the Shonen Jump firmware runs on an NES or SNES Classic.
+DefKorns/famicom-clovercon-fix | famicom_clovercon_fix | \.hmod$ | stable | System | Fixes unresponsive controllers and a frozen menu when the Famicom Mini or Shonen Jump firmware runs on an NES or SNES Classic.
