@@ -28,4 +28,3 @@ DefKorns/om_console-language-packs | om_console-language_snes_eur_nor | ^om_cons
 DefKorns/om_console-language-packs | om_console-language_snes_eur_swe | ^om_console-language_snes_eur_swe\.hmod$ | pre | Language Packs | Svenska for the SNES / Super Famicom Mini.
 DefKorns/om_console-language-packs | om_console-language_snes_jpn_ja | ^om_console-language_snes_jpn_ja\.hmod$ | pre | Language Packs | 日本語 for the SNES / Super Famicom Mini.
 DefKorns/om_console-language-packs | om_console-language_snes_por_br | ^om_console-language_snes_por_br\.hmod$ | pre | Language Packs | Português (Brasil) for the SNES / Super Famicom Mini.
-DefKorns/om_console-language-packs | om_console-language_hvc | ^om_console-language_hvc\.hmod$ | pre | Language Packs | The Famicom Mini's other languages.
