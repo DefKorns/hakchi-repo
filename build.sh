@@ -18,7 +18,7 @@ cp -r assets/. "$OUT/"
 categories=()
 declare -A cat_md cat_rows
 
-html_escape() { sed -e 's/&/\&amp;/g' -e 's/</\&lt;/g' -e 's/>/\&gt;/g'; }
+html_escape() { sed -e 's/&/\&amp;/g' -e 's/</\&lt;/g' -e 's/>/\&gt;/g' -e 's/"/\&quot;/g'; }
 trim() { local s=$1; s=${s#"${s%%[![:space:]]*}"}; printf '%s' "${s%"${s##*[![:space:]]}"}"; }
 
 while IFS='|' read -r repo name pattern channel category description; do
@@ -82,7 +82,18 @@ while IFS='|' read -r repo name pattern channel category description; do
 
   [ -n "${cat_md[$category]+x}" ] || categories+=("$category")
   cat_md[$category]+="- **$title** - $release_label${description:+ - $description} ([source](https://github.com/$repo))"$'\n'
-  cat_rows[$category]+="<tr><td>$(printf '%s' "$title" | html_escape)${description:+<br><small>$(printf '%s' "$description" | html_escape)</small>}</td><td>$(printf '%s' "$release_label" | html_escape)</td><td><a href=\"$url\">$name.hmod</a></td><td><a href=\"https://github.com/$repo\">$repo</a></td></tr>
+  version_class="ver mono"
+  version_title=
+  if [ "$prerelease" = true ]; then
+    version_class="ver mono pre"
+    version_title=' title="pre-release"'
+  fi
+  search_text=$(printf '%s %s' "$title" "$description" | tr '[:upper:]' '[:lower:]' | html_escape)
+  cat_rows[$category]+="      <li class=\"row\" data-text=\"$search_text\">
+        <div><h3>$(printf '%s' "$title" | html_escape)</h3><p>$(printf '%s' "${description:-}" | html_escape)</p></div>
+        <span class=\"$version_class\"$version_title>$tag</span>
+        <div class=\"act\"><a class=\"dl\" href=\"$url\">Download</a><a class=\"src\" href=\"https://github.com/$repo\">Source</a></div>
+      </li>
 "
 
   echo "$name.hmod" >> "$REPO_DIR/list"
@@ -92,15 +103,15 @@ done < sources.txt
 mods_md=""
 sections=""
 for category in "${categories[@]}"; do
-  mods_md+="### $category"$'\n\n'"${cat_md[$category]}"$'\n'
-  sections+="<h2>$(printf '%s' "$category" | html_escape)</h2>
-<div class=\"scroll\">
-<table>
-<thead><tr><th>Mod</th><th>Release</th><th>Download</th><th>Source</th></tr></thead>
-<tbody>
-${cat_rows[$category]}</tbody>
-</table>
-</div>
+  mods_md+="### $category"$'
+
+'"${cat_md[$category]}"$'
+'
+  sections+="  <section class=\"group\">
+    <h2>$(printf '%s' "$category" | html_escape)</h2>
+    <ul class=\"rows\">
+${cat_rows[$category]}    </ul>
+  </section>
 "
 done
 
@@ -111,32 +122,7 @@ MODS="$mods_md" UPDATED="$(date -u +%Y-%m-%d)" awk '
 
 (cd "$REPO_DIR" && tar -czf pack.tgz list readme.md ./*.hmod)
 
-cat > "$OUT/index.html" << HTML
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>DefKorns' Mods</title>
-<style>
-  :root { color-scheme: light dark; --fg: #1d1d1f; --bg: #fff; --muted: #6e6e73; --line: #d2d2d7; --code: #f2f2f5; }
-  @media (prefers-color-scheme: dark) { :root { --fg: #f5f5f7; --bg: #1c1c1e; --muted: #a1a1a6; --line: #3a3a3c; --code: #2c2c2e; } }
-  body { margin: 0 auto; max-width: 860px; padding: 32px 16px; font: 16px/1.5 system-ui, sans-serif; color: var(--fg); background: var(--bg); }
-  p { color: var(--muted); }
-  code { background: var(--code); padding: 2px 6px; border-radius: 4px; word-break: break-all; }
-  .scroll { overflow-x: auto; }
-  table { width: 100%; border-collapse: collapse; margin-top: 16px; }
-  th, td { text-align: left; padding: 8px; border-bottom: 1px solid var(--line); }
-  a { color: inherit; }
-  h2 { margin-top: 32px; }
-  small { color: var(--muted); }
-</style>
-</head>
-<body>
-<img src="logo.png" alt="DefKorns" width="160">
-<h1>DefKorns' Mods</h1>
-<p>hakchi2-CE mod repository. In hakchi, open <strong>Manage repositories</strong> and add:</p>
-<p><code>$SITE_URL</code></p>
-$sections</body>
-</html>
-HTML
+SECTIONS="$sections" SITE_URL="$SITE_URL" UPDATED="$(date -u +%Y-%m-%d)" awk '
+  /^\{\{SECTIONS\}\}$/ { printf "%s", ENVIRON["SECTIONS"]; next }
+  { gsub(/\{\{SITE_URL\}\}/, ENVIRON["SITE_URL"]); gsub(/\{\{UPDATED\}\}/, ENVIRON["UPDATED"]); print }
+' template.html > "$OUT/index.html"

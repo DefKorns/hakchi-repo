@@ -1,20 +1,20 @@
-<p align="center"><img src="https://defkorns.github.io/hakchi-repo/logo.png" alt="DefKorns" width="200"></p>
+<p align="center"><img src="https://defkorns.github.io/hakchi-repo/banner.png" alt="DefKorns' Mods" width="760"></p>
 
-# DefKorns' Mod Hub
+**Made for the official consoles.** Clones and knock-offs are not supported.
 
-My hmods for the Classic Minis: NES, SNES, Famicom, Super Famicom and Shonen Jump.
+## Start here
 
-**Made for the official consoles - clones and knock-offs are not supported.**
+1. Open the **Options Menu** tab and install **Options Menu** first. Everything in *Options Menu - Addons* needs it.
+2. Pick the **(compat)** build instead if another hmod replaces the system `libstdc++`, for example RetroArch 1.8.4 Xtreme SC.
+3. Browse the other tabs, install what you like and sync with your console.
 
-## How to use
+Each mod's page tells you which console it's for and what it needs.
 
-1. Browse the tabs - each mod's page tells you which console it's for and what it needs.
-2. Install what you want and sync with your console.
+## What's here
 
-**Options Menu addons** (Theme Selector, Japanese Font Pack...) need **Options Menu**, from the *Options Menu* tab, installed first. Pick its *(compat)* build if another hmod replaces the system `libstdc++` (e.g. RetroArch 1.8.4 Xtreme SC).
-
+{{MODS}}
 > **Wifi Backup is now part of Options Menu.** If you still have *om-wifi-backup* installed, uninstall it and then reinstall Options Menu.
 
 ---
 
-Updated {{UPDATED}} · Source, releases and issues: [github.com/DefKorns](https://github.com/DefKorns) · On the web: [defkorns.github.io/hakchi-repo](https://defkorns.github.io/hakchi-repo/)
+Updated {{UPDATED}} · [Source, releases and issues](https://github.com/DefKorns) · [On the web](https://defkorns.github.io/hakchi-repo/)
