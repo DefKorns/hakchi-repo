@@ -33,13 +33,19 @@ while IFS='|' read -r repo name pattern channel category description; do
   stable_only='| select(.prerelease | not)'
   [ "$channel" = pre ] && stable_only=''
 
-  release=$(PATTERN="$pattern" gh api "repos/$repo/releases?per_page=30" --jq "
-    [.[] | select(.draft | not) $stable_only
-      | {tag: .tag_name, pre: .prerelease, published: .published_at, asset: ([.assets[] | select(.name | test(env.PATTERN))] | first)}
-      | select(.asset)]
-    | sort_by(.published) | reverse
-    | first // empty
-    | [.tag, .asset.browser_download_url, .pre] | @tsv")
+  # the releases API now and then answers with an empty list
+  release=""
+  for attempt in 1 2 3 4 5; do
+    release=$(PATTERN="$pattern" gh api "repos/$repo/releases?per_page=30" --jq "
+      [.[] | select(.draft | not) $stable_only
+        | {tag: .tag_name, pre: .prerelease, published: .published_at, asset: ([.assets[] | select(.name | test(env.PATTERN))] | first)}
+        | select(.asset)]
+      | sort_by(.published) | reverse
+      | first // empty
+      | [.tag, .asset.browser_download_url, .pre] | @tsv")
+    [ -n "$release" ] && break
+    [ "$attempt" -lt 5 ] && sleep 5
+  done
 
   if [ -z "$release" ]; then
     echo "skip $name: no $channel release of $repo has an asset matching $pattern" >&2
