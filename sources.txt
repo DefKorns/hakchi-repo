@@ -1,11 +1,11 @@
-# repo | name (.hmod in hakchi) | asset regex | channel | category (hakchi tab) | description
+# repo | name (.hmod in hakchi) | asset regex | channel | category (hakchi tab) | description | emulated system (optional, groups the list)
 DefKorns/OptionsMenu | options_menu | ^options_[a-z]+(_v[0-9_]+(-[a-z]+[0-9]*(_[0-9]+)*)?)?\.hmod$ | stable | Options Menu | The menu every other mod here plugs into. Install this first.
 DefKorns/OptionsMenu | options_menu_compat | ^options_.*_compat\.hmod$ | stable | Options Menu | Same menu with its own libstdc++, for setups with an hmod that replaces the system one (e.g. RetroArch 1.8.4 Xtreme SC).
 DefKorns/om_theme-selector | om_theme-selector | ^om_theme-selector.*\.hmod$ | stable | Options Menu - Addons | Pick, download and build themes, and set a theme or music per folder.
 DefKorns/OptionsMenu-JapaneseFontPack | om_japanese_font_pack | \.hmod$ | stable | Options Menu - Addons | Smooth Japanese font (Noto Sans JP) for the menu when the language is set to Japanese.
 DefKorns/om-gamepad-remapping-tool | om-gamepad-remapping-tool | \.hmod$ | stable | Options Menu - Addons | Remap your controller buttons for Canoe and Kachikachi from the menu.
 DefKorns/famicom-clovercon-fix | famicom_clovercon_fix | \.hmod$ | stable | System | Fixes unresponsive controllers and a frozen menu when the Famicom Mini or Shonen Jump firmware runs on an NES or SNES Classic.
-DefKorns/RetroArch-S-NESCE | retroarch_snesce | ^retroarch_snesce\.hmod$ | pre | RetroArch | RetroArch for the NES and SNES Classic. Install it first, every core in this tab needs it.
+DefKorns/RetroArch-S-NESCE | retroarch_snesce | ^retroarch_snesce\.hmod$ | pre | RetroArch | RetroArch for the NES and SNES Classic. Install it first, every core in this tab needs it. | Frontend
 DefKorns/retroarch-snesce-cores | retroarch_snesce_core_snes9x2005 | ^retroarch_snesce_core_snes9x2005\.hmod$ | pre | RetroArch | Snes9x 2005 (SNES).
 DefKorns/retroarch-snesce-cores | retroarch_snesce_core_snes9x2010 | ^retroarch_snesce_core_snes9x2010\.hmod$ | pre | RetroArch | Snes9x 2010 (SNES).
 DefKorns/retroarch-snesce-cores | retroarch_snesce_core_fceumm | ^retroarch_snesce_core_fceumm\.hmod$ | pre | RetroArch | FCEUmm (NES, Famicom Disk System).

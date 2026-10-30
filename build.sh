@@ -21,14 +21,15 @@ declare -A cat_md cat_rows
 html_escape() { sed -e 's/&/\&amp;/g' -e 's/</\&lt;/g' -e 's/>/\&gt;/g' -e 's/"/\&quot;/g'; }
 trim() { local s=$1; s=${s#"${s%%[![:space:]]*}"}; printf '%s' "${s%"${s##*[![:space:]]}"}"; }
 
-while IFS='|' read -r repo name pattern channel category description; do
+while IFS='|' read -r repo name pattern channel category description system; do
   repo=$(trim "$repo")
   case "$repo" in '' | \#*) continue ;; esac
   name=$(trim "$name")
   pattern=$(trim "$pattern")
   channel=$(trim "${channel:-stable}")
   category=$(trim "$category")
-  description=$(trim "${description%$'\r'}")
+  description=$(trim "$description")
+  system=$(trim "${system%$'\r'}")
 
   stable_only='| select(.prerelease | not)'
   [ "$channel" = pre ] && stable_only=''
@@ -73,11 +74,12 @@ while IFS='|' read -r repo name pattern channel category description; do
   else
     printf -- '---\nName: %s\nCreator: %s\nVersion: %s\n---\n' "$name" "${repo%%/*}" "${tag#v}" > "$WORK/readme"
   fi
-  NAME="$name" CATEGORY="$category" awk '
+  NAME="$name" CATEGORY="$category" SYSTEM="$system" awk '
     NR == 1 && !/^---/ { print "---"; print "Name: " ENVIRON["NAME"]; print "Category: " ENVIRON["CATEGORY"]; print "---" }
     NR == 1 && /^---/ { print; head = 1; next }
+    head && /^Emulated System:/ { e = 1 }
     head && /^Category:/ { if (!c) print "Category: " ENVIRON["CATEGORY"]; c = 1; next }
-    head && /^---/ { if (!c) print "Category: " ENVIRON["CATEGORY"]; head = 0 }
+    head && /^---/ { if (!c) print "Category: " ENVIRON["CATEGORY"]; if (!e && ENVIRON["SYSTEM"] != "") print "Emulated System: " ENVIRON["SYSTEM"]; head = 0 }
     { print }
   ' "$WORK/readme" > "$readme_out"
 
