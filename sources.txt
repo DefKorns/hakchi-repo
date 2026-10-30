@@ -5,6 +5,18 @@ DefKorns/om_theme-selector | om_theme-selector | ^om_theme-selector.*\.hmod$ | s
 DefKorns/OptionsMenu-JapaneseFontPack | om_japanese_font_pack | \.hmod$ | stable | Options Menu - Addons | Smooth Japanese font (Noto Sans JP) for the menu when the language is set to Japanese.
 DefKorns/om-gamepad-remapping-tool | om-gamepad-remapping-tool | \.hmod$ | stable | Options Menu - Addons | Remap your controller buttons for Canoe and Kachikachi from the menu.
 DefKorns/famicom-clovercon-fix | famicom_clovercon_fix | \.hmod$ | stable | System | Fixes unresponsive controllers and a frozen menu when the Famicom Mini or Shonen Jump firmware runs on an NES or SNES Classic.
+DefKorns/RetroArch-S-NESCE | retroarch_snesce | ^retroarch_snesce\.hmod$ | pre | RetroArch | RetroArch for the NES and SNES Classic. Install it first, every core in this tab needs it.
+DefKorns/retroarch-snesce-cores | retroarch_snesce_core_snes9x2005 | ^retroarch_snesce_core_snes9x2005\.hmod$ | pre | RetroArch | Snes9x 2005 (SNES).
+DefKorns/retroarch-snesce-cores | retroarch_snesce_core_snes9x2010 | ^retroarch_snesce_core_snes9x2010\.hmod$ | pre | RetroArch | Snes9x 2010 (SNES).
+DefKorns/retroarch-snesce-cores | retroarch_snesce_core_fceumm | ^retroarch_snesce_core_fceumm\.hmod$ | pre | RetroArch | FCEUmm (NES, Famicom Disk System).
+DefKorns/retroarch-snesce-cores | retroarch_snesce_core_nestopia | ^retroarch_snesce_core_nestopia\.hmod$ | pre | RetroArch | Nestopia (NES, Famicom Disk System).
+DefKorns/retroarch-snesce-cores | retroarch_snesce_core_quicknes | ^retroarch_snesce_core_quicknes\.hmod$ | pre | RetroArch | QuickNES (NES).
+DefKorns/retroarch-snesce-cores | retroarch_snesce_core_smsplus | ^retroarch_snesce_core_smsplus\.hmod$ | pre | RetroArch | SMS Plus GX (Master System, Game Gear).
+DefKorns/retroarch-snesce-cores | retroarch_snesce_core_genesis_plus_gx | ^retroarch_snesce_core_genesis_plus_gx\.hmod$ | pre | RetroArch | Genesis Plus GX (Mega Drive, Sega CD, Master System, Game Gear).
+DefKorns/retroarch-snesce-cores | retroarch_snesce_core_genesis_plus_gx_ex | ^retroarch_snesce_core_genesis_plus_gx_ex\.hmod$ | pre | RetroArch | Genesis Plus GX EX: the same, plus Paprium. Needs the game and its music, which are not included.
+DefKorns/retroarch-snesce-cores | retroarch_snesce_core_genesis_plus_gx_wide | ^retroarch_snesce_core_genesis_plus_gx_wide\.hmod$ | pre | RetroArch | Genesis Plus GX Wide: the same in widescreen. Experimental, some games need a patch.
+DefKorns/retroarch-snesce-cores | retroarch_snesce_core_picodrive | ^retroarch_snesce_core_picodrive\.hmod$ | pre | RetroArch | PicoDrive (Mega Drive, Sega CD, 32X, Master System).
+DefKorns/retroarch-snesce-cores | retroarch_snesce_core_pcsx_rearmed | ^retroarch_snesce_core_pcsx_rearmed\.hmod$ | pre | RetroArch | PCSX ReARMed (PlayStation).
 # Console Language and its language packs: hidden until Console Language is released
 # DefKorns/om_console-language | om_console-language | ^om_console-language\.hmod$ | stable | Options Menu - Addons | Every system language and rōmaji game titles on the Japanese consoles, plus downloadable language packs. Pick your console's language packs below.
 # DefKorns/om_console-language-packs | om_console-language_nes_as_id | ^om_console-language_nes_as_id\.hmod$ | stable | Language Packs - NES | Bahasa Indonesia for the NES / Famicom Mini.

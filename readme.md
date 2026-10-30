@@ -6,7 +6,8 @@
 
 1. Open the **Options Menu** tab and install **Options Menu** first. Everything in *Options Menu - Addons* needs it.
 2. Pick the **(compat)** build instead if another hmod replaces the system `libstdc++`, for example RetroArch 1.8.4 Xtreme SC.
-3. Browse the other tabs, install what you like and sync with your console.
+3. Open the **RetroArch** tab and install **RetroArch** first, then the cores you want. A core does nothing without it.
+4. Browse the other tabs, install what you like and sync with your console.
 
 Each mod's page tells you which console it's for and what it needs.
 
