@@ -6,8 +6,7 @@ DefKorns/OptionsMenu-JapaneseFontPack | om_japanese_font_pack | \.hmod$ | stable
 DefKorns/om-gamepad-remapping-tool | om-gamepad-remapping-tool | \.hmod$ | stable | Options Menu - Addons | Remap your controller buttons for Canoe and Kachikachi from the menu.
 DefKorns/famicom-clovercon-fix | famicom_clovercon_fix | \.hmod$ | stable | System | Fixes unresponsive controllers and a frozen menu when the Famicom Mini or Shonen Jump firmware runs on an NES or SNES Classic.
 DefKorns/RetroArch-S-NESCE | retroarch_snesce | ^retroarch_snesce\.hmod$ | pre | RetroArch | RetroArch for the NES and SNES Classic. Install it first, every core in this tab needs it. | Frontend
-DefKorns/retroarch-snesce-cores | retroarch_snesce_core_snes9x2005 | ^retroarch_snesce_core_snes9x2005\.hmod$ | pre | RetroArch | Snes9x 2005 (SNES).
-DefKorns/retroarch-snesce-cores | retroarch_snesce_core_snes9x2010 | ^retroarch_snesce_core_snes9x2010\.hmod$ | pre | RetroArch | Snes9x 2010 (SNES).
+DefKorns/retroarch-snesce-cores | retroarch_snesce_core_snes9x_bundle | ^retroarch_snesce_core_snes9x_bundle\.hmod$ | pre | RetroArch | Snes9x 2005, 2010 and 1.63 (SNES). Replaces the single Snes9x 2005 and 2010 hmods. 1.63 is the newest and heaviest: use 2010 or 2005 for SA-1 games.
 DefKorns/retroarch-snesce-cores | retroarch_snesce_core_fceumm | ^retroarch_snesce_core_fceumm\.hmod$ | pre | RetroArch | FCEUmm (NES, Famicom Disk System).
 DefKorns/retroarch-snesce-cores | retroarch_snesce_core_nestopia | ^retroarch_snesce_core_nestopia\.hmod$ | pre | RetroArch | Nestopia (NES, Famicom Disk System).
 DefKorns/retroarch-snesce-cores | retroarch_snesce_core_quicknes | ^retroarch_snesce_core_quicknes\.hmod$ | pre | RetroArch | QuickNES (NES).
@@ -18,6 +17,9 @@ DefKorns/retroarch-snesce-cores | retroarch_snesce_core_genesis_plus_gx_wide | ^
 DefKorns/retroarch-snesce-cores | retroarch_snesce_core_picodrive | ^retroarch_snesce_core_picodrive\.hmod$ | pre | RetroArch | PicoDrive (Mega Drive, Sega CD, 32X, Master System).
 DefKorns/retroarch-snesce-cores | retroarch_snesce_core_pcsx_rearmed | ^retroarch_snesce_core_pcsx_rearmed\.hmod$ | pre | RetroArch | PCSX ReARMed (PlayStation).
 DefKorns/retroarch-snesce-cores | retroarch_snesce_core_mupen64plus | ^retroarch_snesce_core_mupen64plus\.hmod$ | pre | RetroArch | Mupen64Plus GLES2 (Nintendo 64). D-pad can act as the control stick.
+DefKorns/retroarch-snesce-cores | retroarch_snesce_core_mgba | ^retroarch_snesce_core_mgba\.hmod$ | pre | RetroArch | mGBA (Game Boy Advance, Game Boy, Game Boy Color).
+DefKorns/retroarch-snesce-cores | retroarch_snesce_core_mame2003_plus | ^retroarch_snesce_core_mame2003_plus\.hmod$ | pre | RetroArch | MAME 2003-Plus (Arcade).
+DefKorns/retroarch-snesce-cores | retroarch_snesce_core_fbneo | ^retroarch_snesce_core_fbneo\.hmod$ | pre | RetroArch | FinalBurn Neo (Arcade).
 # Console Language and its language packs: hidden until Console Language is released
 # DefKorns/om_console-language | om_console-language | ^om_console-language\.hmod$ | stable | Options Menu - Addons | Every system language and rōmaji game titles on the Japanese consoles, plus downloadable language packs. Pick your console's language packs below.
 # DefKorns/om_console-language-packs | om_console-language_nes_as_id | ^om_console-language_nes_as_id\.hmod$ | stable | Language Packs - NES | Bahasa Indonesia for the NES / Famicom Mini.
