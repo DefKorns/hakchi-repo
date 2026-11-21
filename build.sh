@@ -54,13 +54,15 @@ while IFS='|' read -r repo name pattern channel category description system; do
   fi
   IFS=$'\t' read -r tag url prerelease <<< "$release"
 
-  hmod=$WORK/$name.hmod
+  ext=hmod
+  case "$url" in *.clvg) ext=clvg ;; esac
+  hmod=$WORK/$name.$ext
   if ! curl -fsSL -o "$hmod" "$url"; then
     echo "skip $name: download failed ($url)" >&2
     continue
   fi
 
-  dir=$REPO_DIR/$name.hmod
+  dir=$REPO_DIR/$name.$ext
   mkdir -p "$dir"
   echo "$url" > "$dir/link"
   md5sum "$hmod" | cut -d' ' -f1 > "$dir/md5"
@@ -104,7 +106,7 @@ while IFS='|' read -r repo name pattern channel category description system; do
       </li>
 "
 
-  echo "$name.hmod" >> "$REPO_DIR/list"
+  echo "$name.$ext" >> "$REPO_DIR/list"
   echo "$name: $tag ($category)"
 done < sources.txt
 
@@ -128,7 +130,7 @@ MODS="$mods_md" UPDATED="$(date -u +%Y-%m-%d)" awk '
   { gsub(/\{\{UPDATED\}\}/, ENVIRON["UPDATED"]); print }
 ' readme.md > "$REPO_DIR/readme.md"
 
-(cd "$REPO_DIR" && tar -czf pack.tgz list readme.md ./*.hmod)
+(cd "$REPO_DIR" && shopt -s nullglob && items=(./*.hmod ./*.clvg) && tar -czf pack.tgz list readme.md "${items[@]}")
 
 SECTIONS="$sections" SITE_URL="$SITE_URL" UPDATED="$(date -u +%Y-%m-%d)" awk '
   /^\{\{SECTIONS\}\}$/ { printf "%s", ENVIRON["SECTIONS"]; next }

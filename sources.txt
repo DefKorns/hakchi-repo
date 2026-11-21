@@ -40,3 +40,4 @@ DefKorns/retroarch-snesce-cores | retroarch_snesce_core_mupen64plus | ^retroarch
 # DefKorns/om_console-language-packs | om_console-language_snes_eur_swe | ^om_console-language_snes_eur_swe\.hmod$ | stable | Language Packs - SNES | Svenska for the SNES / Super Famicom Mini.
 # DefKorns/om_console-language-packs | om_console-language_snes_jpn_ja | ^om_console-language_snes_jpn_ja\.hmod$ | stable | Language Packs - SNES | 日本語 for the SNES / Super Famicom Mini.
 # DefKorns/om_console-language-packs | om_console-language_snes_por_br | ^om_console-language_snes_por_br\.hmod$ | stable | Language Packs - SNES | Português (Brasil) for the SNES / Super Famicom Mini.
+DefKorns/outrunners-port | outrunners | ^OutRunners\.clvg$ | pre | Games | OutRunners, the Sega arcade game from 1992, as a native port by cheviman. Put your own orunners.zip (MAME's orunners set) in the game's folder in Hakchi. | Arcade
