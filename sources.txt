@@ -11,12 +11,11 @@ DefKorns/retroarch-snesce-cores | retroarch_snesce_core_fceumm | ^retroarch_snes
 DefKorns/retroarch-snesce-cores | retroarch_snesce_core_nestopia | ^retroarch_snesce_core_nestopia\.hmod$ | pre | RetroArch | Nestopia (NES, Famicom Disk System).
 DefKorns/retroarch-snesce-cores | retroarch_snesce_core_quicknes | ^retroarch_snesce_core_quicknes\.hmod$ | pre | RetroArch | QuickNES (NES).
 DefKorns/retroarch-snesce-cores | retroarch_snesce_core_smsplus | ^retroarch_snesce_core_smsplus\.hmod$ | pre | RetroArch | SMS Plus GX (Master System, Game Gear).
-DefKorns/retroarch-snesce-cores | retroarch_snesce_core_genesis_plus_gx | ^retroarch_snesce_core_genesis_plus_gx\.hmod$ | pre | RetroArch | Genesis Plus GX (Mega Drive, Sega CD, Master System, Game Gear).
-DefKorns/retroarch-snesce-cores | retroarch_snesce_core_genesis_plus_gx_ex | ^retroarch_snesce_core_genesis_plus_gx_ex\.hmod$ | pre | RetroArch | Genesis Plus GX EX: the same, plus Paprium. Needs the game and its music, which are not included.
-DefKorns/retroarch-snesce-cores | retroarch_snesce_core_genesis_plus_gx_wide | ^retroarch_snesce_core_genesis_plus_gx_wide\.hmod$ | pre | RetroArch | Genesis Plus GX Wide: the same in widescreen. Experimental, some games need a patch.
+DefKorns/retroarch-snesce-cores | retroarch_snesce_core_genesis_plus_gx_bundle | ^retroarch_snesce_core_genesis_plus_gx_bundle\.hmod$ | pre | RetroArch | Genesis Plus GX, EX and Wide (Mega Drive, Sega CD, Master System, Game Gear). Replaces the three single Genesis Plus GX hmods. EX also plays Paprium (game and music not included); Wide is experimental widescreen.
 DefKorns/retroarch-snesce-cores | retroarch_snesce_core_picodrive | ^retroarch_snesce_core_picodrive\.hmod$ | pre | RetroArch | PicoDrive (Mega Drive, Sega CD, 32X, Master System).
 DefKorns/retroarch-snesce-cores | retroarch_snesce_core_pcsx_rearmed | ^retroarch_snesce_core_pcsx_rearmed\.hmod$ | pre | RetroArch | PCSX ReARMed (PlayStation).
 DefKorns/retroarch-snesce-cores | retroarch_snesce_core_mupen64plus | ^retroarch_snesce_core_mupen64plus\.hmod$ | pre | RetroArch | Mupen64Plus GLES2 (Nintendo 64). D-pad can act as the control stick.
+DefKorns/retroarch-snesce-cores | retroarch_snesce_core_ppsspp | ^retroarch_snesce_core_ppsspp\.hmod$ | pre | RetroArch | PPSSPP (PSP). Experimental: speed depends on the game.
 DefKorns/retroarch-snesce-cores | retroarch_snesce_core_mgba | ^retroarch_snesce_core_mgba\.hmod$ | pre | RetroArch | mGBA (Game Boy Advance, Game Boy, Game Boy Color).
 DefKorns/retroarch-snesce-cores | retroarch_snesce_core_mame2003_plus | ^retroarch_snesce_core_mame2003_plus\.hmod$ | pre | RetroArch | MAME 2003-Plus (Arcade).
 DefKorns/retroarch-snesce-cores | retroarch_snesce_core_fbneo | ^retroarch_snesce_core_fbneo\.hmod$ | pre | RetroArch | FinalBurn Neo (Arcade).
